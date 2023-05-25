@@ -1,0 +1,36 @@
+.history-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-text.history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: none;
+  margin-bottom: 0px;
+}
+
+.restaurant-links-dir {
+  display: flex;
+  justify-content: right;
+}
+
+.restaurant-links-dir a {
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 10px;
+  background-color: #e67e22;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.restaurant-links-dir a:hover {
+  background-color: #d35400;
+}

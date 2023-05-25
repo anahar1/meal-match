@@ -1,0 +1,207 @@
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+    max-width: 600px;
+    max-height: 90%;
+    width: 90%;
+    overflow: auto;
+  }
+  
+  .popup h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .popup h3 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .popup p {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .popup .restaurant-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .popup .restaurant-image {
+    flex-basis: 50%;
+    max-width: 300px;
+    margin-right: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  
+  .restaurant-image:hover img {
+    transform: scale(1.2);
+  }
+  
+  .restaurant-image:hover::before {
+    content: "Visit Website";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+  
+  .restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .restaurant-image:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    filter: opacity(0.8);
+  }
+  
+  .popup .restaurant-info {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .popup .restaurant-info h3 {
+    margin-bottom: 10px;
+    margin-top: 6px;
+  }
+  
+  .popup .restaurant-ratings {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .popup .rating {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: #feca57;
+  }
+  
+  .popup .review-count {
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .popup .restaurant-links {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .popup .restaurant-links a {
+    cursor: pointer;
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 10px;
+    background-color: #e67e22;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+  }
+  
+  .popup .restaurant-links a:hover {
+    background-color: #d35400;
+  }
+  
+  .popup button {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background-color: #feca57;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .popup button:hover {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  /* .ReactModal__Content {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 100%;
+    max-height: calc(100vh - 100px);
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+  } */
+  
+  .ReactModal__Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0066cc;
+  }
+  
+  
+  
+
+  
