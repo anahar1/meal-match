@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/meal-match/static/css/main.bd5eb33a.css",
+    "main.js": "/meal-match/static/js/main.b6a15c95.js",
+    "index.html": "/meal-match/index.html",
+    "main.bd5eb33a.css.map": "/meal-match/static/css/main.bd5eb33a.css.map",
+    "main.b6a15c95.js.map": "/meal-match/static/js/main.b6a15c95.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd5eb33a.css",
+    "static/js/main.b6a15c95.js"
+  ]
+}
