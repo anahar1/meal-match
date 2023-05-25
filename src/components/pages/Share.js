@@ -6,7 +6,7 @@ function Share({ setShowShare, linkID }) {
   const [showCopy, setShowCopy] = useState(false);
 
   const generateLink = () => {
-    const newLink = `http://akskola.github.io/meal-match/#/singlesession/${linkID}`;
+    const newLink = `http://anahar1.github.io/meal-match/#/singlesession/${linkID}`;
     setLink(newLink);
     navigator.clipboard.writeText(newLink);
     setShowCopy(true);
