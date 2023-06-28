@@ -13,7 +13,9 @@
   align-items: center;
   position: relative;
 }
-
+button {
+  margin-right: 20px;
+}
 .background {
   position: absolute;
   top: 0;

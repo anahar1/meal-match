@@ -5,11 +5,12 @@ import { Link, Routes, Route, Navigate } from "react-router-dom";
 import CreateDate from "./components/pages/CreateDate";
 import History from "./components/pages/History";
 import SingleSession from "./components/pages/SingleSession";
-
+import { app, auth } from "./components/pages/firebase"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("");
-
+  const [password, setPassword] = useState("");
   const [gradientPosition, setGradientPosition] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e) => {
@@ -18,16 +19,48 @@ const App = () => {
     const yPos = ((clientY / window.innerHeight) * 100).toFixed(2);
     setGradientPosition({ x: xPos, y: yPos });
   };
-
-  const handleLogin = () => {
-    if (name !== "") {
+  auth.onAuthStateChanged(user => {
+    if(user){
+      setName(user.email);
       setIsLoggedIn(true);
       localStorage.setItem("name", name);
+    }
+  });
+  const handleLogin = () => {
+    if (name !== "") {
+      signInWithEmailAndPassword(auth, name, password).then((cred) => {
+        setIsLoggedIn(true);
+      }).catch((err) => {
+        alert(err);
+        window.location = "/"
+      })
+      localStorage.setItem("name", name);
+    } else {
+      alert("You must enter an email address")
+      window.location = "/"
+    }
+  };
+
+  const handleFirstLogin = () => {
+    if (name !== "") {
+      createUserWithEmailAndPassword(auth, name, password).then((cred) => {
+        setIsLoggedIn(true);
+      }).catch((err) => {
+        alert(err);
+        window.location = "/"
+      })
+      localStorage.setItem("name", name);
+    } else {
+      alert("You must enter an email address")
+      window.location = "/"
     }
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    auth.signOut().then(() => {
+      window.location = "/"
+      setIsLoggedIn(false);
+    })
   };
 
   return (
@@ -93,8 +126,9 @@ const App = () => {
                   <br /> {/* New line added here */}
                   <br /> {/* New line added here */}
                   <div className="create-date-container-inputs">
+                    <form>
                     <div className="create-date-input-container">
-                      <label htmlFor="cuisine1"> User Name :</label>
+                      <label htmlFor="cuisine1"> Email :</label>
                       <input
                         type="text"
                         id="cuisine1"
@@ -104,12 +138,28 @@ const App = () => {
                         required
                       />
                     </div>
-                    <br /> {/* New line added here */}
+                    <div className="create-date-input-container">
+                      <label htmlFor="cuisinepw"> Password :</label>
+                      <input
+                        type="password"
+                        id="cuisinepw"
+                        name="cuisinepw"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
                     <Link to="/createdate">
                       <button onClick={handleLogin} className="login-button">
                         Log In
                       </button>
                     </Link>
+                    <Link to="/createdate">
+                      <button onClick={handleFirstLogin} className="login-button">
+                        Sign Up
+                      </button>
+                    </Link>
+                  </form>
                   </div>
                 </div>
               </div>
