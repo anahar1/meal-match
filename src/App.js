@@ -20,7 +20,9 @@ const App = () => {
     setGradientPosition({ x: xPos, y: yPos });
   };
   auth.onAuthStateChanged(user => {
-    if(user){
+    const url = window.location.href.toLowerCase();
+    const urlArr = url.split("/");
+    if(user && !urlArr.includes("singlesession")){
       setName(user.email);
       setIsLoggedIn(true);
       localStorage.setItem("name", name);
@@ -32,12 +34,12 @@ const App = () => {
         setIsLoggedIn(true);
       }).catch((err) => {
         alert(err);
-        window.location = "/"
+        window.location = "/meal-match/#"
       })
       localStorage.setItem("name", name);
     } else {
       alert("You must enter an email address")
-      window.location = "/"
+      window.location = "/meal-match/#"
     }
   };
 
@@ -47,7 +49,7 @@ const App = () => {
         setIsLoggedIn(true);
       }).catch((err) => {
         alert(err);
-        window.location = "/"
+        window.location = "/meal-match/#"
       })
       localStorage.setItem("name", name);
     } else {
@@ -58,7 +60,7 @@ const App = () => {
 
   const handleLogout = () => {
     auth.signOut().then(() => {
-      window.location = "/"
+      window.location = "/meal-match/#"
       setIsLoggedIn(false);
     })
   };
