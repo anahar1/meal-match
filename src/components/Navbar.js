@@ -35,11 +35,11 @@ const Navbar = ({ onLogout, userName }) => {
               className='nav-links'
               onClick={closeMobileMenu}
             >
-              Meal History
+              Restaurant Selection
             </Link>
           </li>
           <li className='nav-item1'>
-              User Name: { userName }      
+              User ID: { userName }      
           </li>
         </ul>
         <Button onLogout={onLogout} />
