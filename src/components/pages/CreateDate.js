@@ -8,20 +8,19 @@ export default function CreateDate(props) {
   const [restaurants, setRestaurants] = useState([]);
   const [error, setError] = useState(null);
   const [desirabilities, setDesirabilities] = useState({});
-  const [location, setLocation] = useState("");
+  // const [location1, setLocation1] = useState("");
+  // const [location2, setLocation2] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [gradientPosition, setGradientPosition] = useState({ x: 50, y: 50 });
   const [showShare, setShowShare] = useState(false);
   const [sessionID, setSessionID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
     const xPos = ((clientX / window.innerWidth) * 100).toFixed(2);
     const yPos = ((clientY / window.innerHeight) * 100).toFixed(2);
     setGradientPosition({ x: xPos, y: yPos });
   };
-
   const handleShare = async () => {
     const newID = await addUser(userName, restaurants, desirabilities);
     setSessionID(newID);
@@ -32,47 +31,52 @@ export default function CreateDate(props) {
     setIsLoading(true);
     desirabilities.length = 0;
     const cuisine1 = document.getElementById("cuisine1").value.toLowerCase();
+    const location1 = document.getElementById("location1").value.toLowerCase();
+    console.log(location1);
     const cuisine2 = document.getElementById("cuisine2").value.toLowerCase();
+    const location2 = document.getElementById("location2").value.toLowerCase();
+    console.log(location2);
     setRestaurants([]);
     setShowButton(false);
     try {
       const apiKey = process.env.REACT_APP_API;
       const proxyUrl = "https://corsproxy.io/?";
-      const url1 =
-        "https://api.yelp.com/v3/businesses/search?categories=" +
-        cuisine1 +
-        "," +
-        cuisine2 +
-        "&location=" +
-        location;
+      // const url1 =
+      //   "https://api.yelp.com/v3/businesses/search?categories=" +
+      //   cuisine1 +
+      //   "," +
+      //   cuisine2 +
+      //   "&location=" +
+      //   location;
 
-      //const url2 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine1+"&location="+location;
-      //const url3 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine2+"&location="+location;
-
+      const url1 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine1+"&location="+location1;
+      const url2 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine2+"&location="+location2;
+      
       const response1 = await fetch(proxyUrl + url1, {
         headers: {
           Authorization: `Bearer ${apiKey}`,
         },
       });
-      const data1 = await response1.json();
-
-      /*const response2 = await fetch(proxyUrl + url2, {
-          headers: {
-            Authorization: `Bearer ${apiKey}`
-          }
-        });
-        const data2 = await response2.json();
-
-        const response3 = await fetch(proxyUrl + url3, {
-          headers: {
-            Authorization: `Bearer ${apiKey}`
-          }
-        });
-        const data3 = await response3.json();*/
-
-      // Filter results to only include restaurants with both cuisine categories
-      const cuisine1and2 = data1.businesses.slice(0, 5);
-
+      let data1 = await response1.json();
+      data1 = data1.businesses.sort((a, b) => b.rating - a.rating);
+      data1 = data1.slice(0, 3);
+      
+      const response2 = await fetch(proxyUrl + url2, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`
+        }
+      });
+      let cuisine1and2 = [];
+      let data2 = await response2.json();
+      data2 = data2.businesses.sort((a, b) => b.rating - a.rating);
+      data2 = data2.slice(0, 3);
+      cuisine1and2 = data1.concat(data2);
+      cuisine1and2 = cuisine1and2.sort((a, b) => b.rating - a.rating);
+      setRestaurants([...cuisine1and2]);
+      setShowButton(true);
+      setError("");
+      setIsLoading(false);
+      
       /*const cuisine1Restaurants = data2.businesses
             .sort((a, b) => b.rating - a.rating)
             .filter(business => !cuisine1and2.includes(business))
@@ -91,7 +95,7 @@ export default function CreateDate(props) {
       setError("");
       setIsLoading(false);
     } catch (err) {
-      alert("Error Loading Restaurants. Enter appropriate cuisines/location!");
+      alert(err);
     }
   };
 
@@ -125,9 +129,9 @@ export default function CreateDate(props) {
               <label htmlFor="dish1">Location</label>
               <input
                 type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Enter your location"
+                id = "location1"
+                //onChange={(e) => setLocation1(e.target.value)}
+                placeholder="Seattle"
               />
             </div>
           </div>
@@ -150,9 +154,9 @@ export default function CreateDate(props) {
               <label htmlFor="dish2">Location</label>
               <input
                 type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Enter your location"
+                id = "location2"
+                //onChange={(e) => setLocation2(e.target.value)}
+                placeholder="New York City"
               />
             </div>
           </div>
