@@ -9,6 +9,8 @@ import {
   updateDoc,
 } from "@firebase/firestore";
 
+import { getAuth } from "firebase/auth"
+
 const firebaseConfig = {
   apiKey: "AIzaSyAXVulGTD8vC_ho1uuXtY-EtmWz7hUJAtA",
   authDomain: "lighthall-challenge-4-68155.firebaseapp.com",
@@ -20,12 +22,12 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const firestore = initializeFirestore(app, {
   experimentalForceLongPolling: true,
   useFetchStreams: false,
 });
-
+export const auth = getAuth(app);
 
 export const addUser = async (userName, restaurants, desirabilities) => {
   const collectionRef = collection(firestore, "Invites");
