@@ -54,7 +54,7 @@ export default function CreateDate(props) {
       
       const response1 = await fetch(proxyUrl + url1, {
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${apiKey}`
         },
       });
       let data1 = await response1.json();

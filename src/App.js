@@ -6,7 +6,7 @@ import CreateDate from "./components/pages/CreateDate";
 import History from "./components/pages/History";
 import SingleSession from "./components/pages/SingleSession";
 import { app, auth } from "./components/pages/firebase"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from"https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from"firebase/auth";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("");
