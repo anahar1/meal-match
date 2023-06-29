@@ -68,6 +68,7 @@ export default function CreateDate(props) {
       cuisine1and2 = data1.concat(data2);
       cuisine1and2 = cuisine1and2.sort((a, b) => b.rating - a.rating);
       setRestaurants([...cuisine1and2]);
+      setShowButton(true);
       localStorage.clear();
       localStorage.setItem("name", userName);
       localStorage.setItem("restaurants", JSON.stringify(cuisine1and2));
@@ -102,15 +103,17 @@ export default function CreateDate(props) {
                 type="text"
                 id="cuisine1"
                 name="cuisine1"
+                required
                 placeholder="Enter cuisine"
               />
             </div>
             <div className="create-date-input-container">
-              <label htmlFor="dish1">Location</label>
+              <label htmlFor="location1">Location</label>
               <input
                 type="text"
                 id = "location1"
-                //onChange={(e) => setLocation1(e.target.value)}
+                name = "location1"
+                required
                 placeholder="Seattle"
               />
             </div>
@@ -127,15 +130,17 @@ export default function CreateDate(props) {
                 type="text"
                 id="cuisine2"
                 name="cuisine2"
+                required
                 placeholder="Enter cuisine"
               />
             </div>
             <div className="create-date-input-container">
-              <label htmlFor="dish2">Location</label>
+              <label htmlFor="location2">Location</label>
               <input
                 type="text"
                 id = "location2"
-                //onChange={(e) => setLocation2(e.target.value)}
+                name = "location2"
+                required
                 placeholder="New York City"
               />
             </div>
