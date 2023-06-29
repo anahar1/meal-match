@@ -8,13 +8,18 @@ export default function CreateDate(props) {
   const [restaurants, setRestaurants] = useState([]);
   const [error, setError] = useState(null);
   const [desirabilities, setDesirabilities] = useState({});
-  // const [location1, setLocation1] = useState("");
-  // const [location2, setLocation2] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [gradientPosition, setGradientPosition] = useState({ x: 50, y: 50 });
   const [showShare, setShowShare] = useState(false);
   const [sessionID, setSessionID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  
+  const get = Storage.prototype.getObj = function(key) {
+      return JSON.parse(localStorage.getItem(key))
+  }
+  if(restaurants.length < 1 && get("restaurants")){
+    setRestaurants(get("restaurants"));
+  }
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
     const xPos = ((clientX / window.innerWidth) * 100).toFixed(2);
@@ -29,29 +34,19 @@ export default function CreateDate(props) {
 
   const handleShowRestaurants = async () => {
     setIsLoading(true);
+    setRestaurants([]);
     desirabilities.length = 0;
     const cuisine1 = document.getElementById("cuisine1").value.toLowerCase();
     const location1 = document.getElementById("location1").value.toLowerCase();
-    console.log(location1);
     const cuisine2 = document.getElementById("cuisine2").value.toLowerCase();
     const location2 = document.getElementById("location2").value.toLowerCase();
-    console.log(location2);
-    setRestaurants([]);
     setShowButton(false);
     try {
       const apiKey = process.env.REACT_APP_API;
       const proxyUrl = "https://corsproxy.io/?";
-      // const url1 =
-      //   "https://api.yelp.com/v3/businesses/search?categories=" +
-      //   cuisine1 +
-      //   "," +
-      //   cuisine2 +
-      //   "&location=" +
-      //   location;
-
       const url1 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine1+"&location="+location1;
       const url2 = "https://api.yelp.com/v3/businesses/search?categories="+cuisine2+"&location="+location2;
-      
+
       const response1 = await fetch(proxyUrl + url1, {
         headers: {
           Authorization: `Bearer ${apiKey}`
@@ -73,24 +68,9 @@ export default function CreateDate(props) {
       cuisine1and2 = data1.concat(data2);
       cuisine1and2 = cuisine1and2.sort((a, b) => b.rating - a.rating);
       setRestaurants([...cuisine1and2]);
-      setShowButton(true);
-      setError("");
-      setIsLoading(false);
-      
-      /*const cuisine1Restaurants = data2.businesses
-            .sort((a, b) => b.rating - a.rating)
-            .filter(business => !cuisine1and2.includes(business))
-            .slice(3, 4);
-        
-            const cuisine2Restaurants = data3.businesses
-            .filter(business => !cuisine1and2.includes(business))
-            .sort((a, b) => b.rating - a.rating)
-            .slice(3, 4);
-
-        setRestaurants([...cuisine1and2, ...cuisine1Restaurants, ...cuisine2Restaurants]);
-        console.log("Else c1: ", cuisine1Restaurants);
-        console.log("Else c2: ", cuisine2Restaurants);*/
-      setRestaurants([...cuisine1and2]);
+      localStorage.clear();
+      localStorage.setItem("name", userName);
+      localStorage.setItem("restaurants", JSON.stringify(cuisine1and2));
       setShowButton(true);
       setError("");
       setIsLoading(false);
@@ -177,7 +157,7 @@ export default function CreateDate(props) {
         <div></div>
       )}
 
-      {restaurants.length > 0 && (
+      { restaurants.length > 0 && (
         <div className="restaurants-container">
           <h2>Top Restaurants</h2>
           <ul className="all-restaurants">
