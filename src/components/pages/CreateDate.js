@@ -19,6 +19,7 @@ export default function CreateDate(props) {
   }
   if(restaurants.length < 1 && get("restaurants")){
     setRestaurants(get("restaurants"));
+    setShowButton(true);
   }
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -68,7 +69,6 @@ export default function CreateDate(props) {
       cuisine1and2 = data1.concat(data2);
       cuisine1and2 = cuisine1and2.sort((a, b) => b.rating - a.rating);
       setRestaurants([...cuisine1and2]);
-      setShowButton(true);
       localStorage.clear();
       localStorage.setItem("name", userName);
       localStorage.setItem("restaurants", JSON.stringify(cuisine1and2));
