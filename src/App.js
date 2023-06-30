@@ -59,6 +59,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
+    localStorage.clear();
     auth.signOut().then(() => {
       window.location = "/meal-match/#"
       setIsLoggedIn(false);

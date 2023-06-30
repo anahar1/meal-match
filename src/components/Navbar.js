@@ -12,7 +12,7 @@ const Navbar = ({ onLogout, userName }) => {
   return (
     <>
       <nav className='navbar'>
-        <Link to='home' className='navbar-logo' onClick={closeMobileMenu}>
+        <Link to="#" className='navbar-logo' onClick={closeMobileMenu}>
           MealMatch
           <i class='fab fa-firstdraft' />
         </Link>

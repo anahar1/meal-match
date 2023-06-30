@@ -15,6 +15,7 @@ export default function SingleSession() {
   const [showPopup, setShowPopup] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [gradientPosition, setGradientPosition] = useState({ x: 50, y: 50 });
+  const [tie, setTie] = useState(false);
 
   useEffect(() => {
     const fetchInviteData = async () => {
@@ -57,6 +58,7 @@ export default function SingleSession() {
       await addSelectedRestaurant(userName, selectedRestaurant, timestamp);
       setShowPopup(false);
       setIsModalOpen(true);
+      setTie(false);
     } catch (error) {
       console.log("Error adding selected restaurant:", error);
     }
@@ -72,7 +74,8 @@ export default function SingleSession() {
         if (score > best.score) {
           return { restaurant, score };
         } else if (score === best.score) {
-          return { restaurant: null, score };
+          setTie(true);
+          return { restaurant, score };
         } else {
           return best;
         }
@@ -177,7 +180,7 @@ export default function SingleSession() {
       <div>Here: {sessionID}</div>
       {selectedRestaurant && showPopup && (
         <div className="popup">
-          {selectedRestaurant.restaurant ? (
+          {!tie ? (
             <div>
               <h2>Most Matched Restaurant:</h2>
               <div className="restaurant-details">
