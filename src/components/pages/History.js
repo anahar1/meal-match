@@ -31,6 +31,7 @@ export default function History(props) {
         setShowRestaurant(false);
       }
       if(history){
+        history.pop();
         setRestaurants([...history]);
         setShowRestaurants(true);
       } else {
