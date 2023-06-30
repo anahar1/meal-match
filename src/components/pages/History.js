@@ -137,7 +137,15 @@ export default function History(props) {
                   <p>
                     <strong>Reviews:</strong> {restaur.selectedRestaurant.restaurant.review_count}
                   </p>
-
+                  <div className="restaurant-links-dir">
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${restaur.selectedRestaurant.restaurant.coordinates.latitude},${restaur.selectedRestaurant.restaurant.coordinates.longitude}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
                 </div>
               </li>
             ))}
