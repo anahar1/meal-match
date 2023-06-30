@@ -61,7 +61,7 @@ export default function History(props) {
               rel="noreferrer"
             >
               <div className="image-container">
-                <img
+                <img className = "shadow"
                   src={restaurant.restaurant.image_url}
                   alt={restaurant.restaurant.name}
                 />
@@ -93,7 +93,7 @@ export default function History(props) {
                 <strong>Date Chosen: </strong> { itemTimestamp }
               </p>
               <div className="restaurant-links-dir">
-                <a
+                <a className = "shadow"
                   href={`https://www.google.com/maps/search/?api=1&query=${restaurant.restaurant.coordinates.latitude},${restaurant.restaurant.coordinates.longitude}`}
                   target="_blank"
                   rel="noreferrer"
@@ -138,7 +138,7 @@ export default function History(props) {
                     <strong>Reviews:</strong> {restaur.selectedRestaurant.restaurant.review_count}
                   </p>
                   <div className="restaurant-links-dir">
-                    <a
+                    <a className = "shadow"
                       href={`https://www.google.com/maps/search/?api=1&query=${restaur.selectedRestaurant.restaurant.coordinates.latitude},${restaur.selectedRestaurant.restaurant.coordinates.longitude}`}
                       target="_blank"
                       rel="noreferrer"
