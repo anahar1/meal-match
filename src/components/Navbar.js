@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
@@ -6,9 +6,28 @@ import './Navbar.css';
 const Navbar = ({ onLogout, userName }) => {
   const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
+  const [refreshPage, setRefreshPage] = useState(false);
+
+  const handleClick = () => {
+    setClick(!click);
+    setRefreshPage(true);
+  };
+
   const closeMobileMenu = () => setClick(false);
 
+  const closeMenu = () => setClick(false);
+
+  useEffect(() => {
+    if (refreshPage) {
+      const timeout = setTimeout(() => {
+        setRefreshPage(false);
+        window.location.reload(); // Refresh the page
+      }, 1500); // Wait for 5 seconds before refreshing
+
+      return () => clearTimeout(timeout);
+    }
+  }, [refreshPage]);
+  
   return (
     <>
       <nav className='navbar'>
@@ -33,9 +52,9 @@ const Navbar = ({ onLogout, userName }) => {
             <Link
               to='/history'
               className='nav-links'
-              onClick={closeMobileMenu}
+              onClick={handleClick}
             >
-              Restaurant Selection
+              Matched It
             </Link>
           </li>
           <li className='nav-item1'>

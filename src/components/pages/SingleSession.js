@@ -8,6 +8,10 @@ import "./SingleSession.css";
 export default function SingleSession() {
   const { sessionID } = useParams();
   const [userName, setUserName] = useState([]);
+  const [cuisine1, setCuisine1] = useState(null);
+  const [cuisine2, setCuisine2] = useState(null);
+  const [location1, setLocation1] = useState(null);
+  const [location2, setLocation2] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [desirabilities1, setDesirabilities1] = useState({});
   const [desirabilities2, setDesirabilities2] = useState({});
@@ -24,6 +28,10 @@ export default function SingleSession() {
         setUserName(inviteData.userName);
         setRestaurants(inviteData.restaurants);
         setDesirabilities1(inviteData.desirabilities);
+        setCuisine1(inviteData.cuisine1)
+        setCuisine2(inviteData.cuisine2)
+        setLocation1(inviteData.location1)
+        setLocation2(inviteData.location2)
       }
     };
     fetchInviteData();
@@ -94,6 +102,68 @@ export default function SingleSession() {
           background: `linear-gradient(90deg, rgba(24, 136, 255, 0.1) 0%, rgba(24, 136, 255, 0.1) 50%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%), radial-gradient(circle at ${gradientPosition.x}% ${gradientPosition.y}%, #1888ff, #000)`,
         }}
       ></div>
+      <div className="restaurants-container1">
+          <h2>Make sure the choices are correct!</h2>
+        </div>
+      <div className="create-date">
+        <div className="create-date-container">
+          <div className="create-date-container-title">Your Partner's Choices</div>
+          <div className="create-date-container-inputs">
+            <div className="create-date-input-container">
+              <label htmlFor="cuisine1">Cuisine</label>
+              <input
+                type="text"
+                id="cuisine1"
+                name="cuisine1"
+                value={cuisine1}
+                required
+                readOnly
+                
+              />
+            </div>
+            <div className="create-date-input-container">
+              <label htmlFor="location1">Location</label>
+              <input
+                type="text"
+                id = "location1"
+                name = "location1"
+                value={location1}
+                required
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
+        <div className="create-date-container">
+          <div className="create-date-container-title">
+            Your Entered Choices
+          </div>
+          <div className="create-date-container-inputs">
+            <div className="create-date-input-container">
+              <label htmlFor="cuisine2">Cuisine</label>
+              <input
+                type="text"
+                id="cuisine2"
+                name="cuisine2"
+                value={cuisine2}
+                required
+                readOnly
+              />
+            </div>
+            <div className="create-date-input-container">
+              <label htmlFor="location2">Location</label>
+              <input
+                type="text"
+                id = "location2"
+                name = "location2"
+                value={location2}
+                required
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       {restaurants.length > 0 && (
         <div className="restaurants-container">
           <h2>Rate the below Restaurants</h2>

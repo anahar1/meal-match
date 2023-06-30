@@ -18,6 +18,8 @@ export default function History(props) {
     setGradientPosition({ x: xPos, y: yPos });
   };
 
+  
+
   useEffect(() => {
     const fetchUserMatchedList = async () => {
       const { selectedRestaurant, timestamp, history } = await userMatchedList(userName);
@@ -44,7 +46,6 @@ export default function History(props) {
 
   return (
     <div clasName="history-container" onMouseMove={handleMouseMove}>
-      <p className="info-text history">Track your MealMatches here:</p>
       <div
         className="background"
         style={{
@@ -107,7 +108,6 @@ export default function History(props) {
       )}
       {showRestaurants && (
         <div className="restaurants-container">
-          <h2>Previous Matches</h2>
           {restaurants.map((restaur) => (
               <li key={restaur.selectedRestaurant.restaurant.id} className="restaurant-container">
                 <a

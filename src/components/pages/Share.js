@@ -36,6 +36,8 @@ function Share({ setShowShare, linkID }) {
                   {link}
                 </a>
               </div>
+              <br></br>
+              <label>Click on the "Matched It" Tab After Your Partner Chooses</label>
             </div>
           )}
           <br /> {/* New line added here */}

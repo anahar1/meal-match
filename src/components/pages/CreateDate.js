@@ -13,7 +13,8 @@ export default function CreateDate(props) {
   const [showShare, setShowShare] = useState(false);
   const [sessionID, setSessionID] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [isLoadingShare, setIsLoadingShare] = useState(false);
+
   const get = Storage.prototype.getObj = function(key) {
       return JSON.parse(localStorage.getItem(key))
   }
@@ -28,8 +29,12 @@ export default function CreateDate(props) {
     setGradientPosition({ x: xPos, y: yPos });
   };
   const handleShare = async () => {
-    const newID = await addUser(userName, restaurants, desirabilities);
+    setIsLoadingShare(true); // Set isLoadingShare to true
+    console.log("HERE ", )
+    const newID = await addUser(userName, restaurants, desirabilities, document.getElementById("cuisine1").value,
+    document.getElementById("cuisine2").value, document.getElementById("location1").value, document.getElementById("location2").value)
     setSessionID(newID);
+    setIsLoadingShare(false)
     setShowShare(true);
   };
 
@@ -114,7 +119,7 @@ export default function CreateDate(props) {
                 id = "location1"
                 name = "location1"
                 required
-                placeholder="Seattle"
+                placeholder="Los Angeles"
               />
             </div>
           </div>
@@ -141,7 +146,7 @@ export default function CreateDate(props) {
                 id = "location2"
                 name = "location2"
                 required
-                placeholder="New York City"
+                placeholder="San Francisco"
               />
             </div>
           </div>
@@ -233,13 +238,26 @@ export default function CreateDate(props) {
                 </div>
               </li>
             ))}
+            {isLoadingShare ? (
+                <div className="loading-spinner-container">
+                  <div className="loading-spinner"></div>
+                  <div className="loading-text">Sharing...</div>
+                </div>
+              ) : (
+                <div></div>
+              )}
             {showButton && (
               <div className="create-btn-container">
                 <button className="create-btn" onClick={() => handleShare()}>
                   Share With Partner
                 </button>
               </div>
+              
             )}
+            
+
+
+            
           </ul>
         </div>
       )}

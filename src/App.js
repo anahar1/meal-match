@@ -5,7 +5,7 @@ import { Link, Routes, Route, Navigate } from "react-router-dom";
 import CreateDate from "./components/pages/CreateDate";
 import History from "./components/pages/History";
 import SingleSession from "./components/pages/SingleSession";
-import { app, auth } from "./components/pages/firebase"
+import { auth } from "./components/pages/firebase"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword} from"firebase/auth";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -113,7 +113,9 @@ const App = () => {
                     location, rate your preferences, and share the link with
                     your partner to receive their choices. With MealMatch, your
                     dining destination will be finalized effortlessly. Don't
-                    hesitate any longer – begin by entering your name.
+                    hesitate any longer – begin by entering your email and password. 
+                    If you don't have an account click on Sign Up button, and if you do, have an
+                    account, click on Log In
                   </p>
                 </p>
                 <div className="create-date-container app">

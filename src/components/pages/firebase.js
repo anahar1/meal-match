@@ -29,14 +29,14 @@ export const firestore = initializeFirestore(app, {
 });
 export const auth = getAuth(app);
 
-export const addUser = async (userName, restaurants, desirabilities) => {
+export const addUser = async (userName, restaurants, desirabilities, cuisine1, cuisine2, location1, location2) => {
   const collectionRef = collection(firestore, "Invites");
   const lastDoc = await getDocs(collectionRef);
   const lastDocId = lastDoc.docs[lastDoc.docs.length - 1].id;
 
   const nextDocId = parseInt(lastDocId) + 1;
   const docRef = doc(firestore, "Invites", nextDocId.toString());
-  const data = { userName, restaurants, desirabilities };
+  const data = { userName, restaurants, desirabilities, cuisine1, cuisine2, location1, location2 };
 
   try {
     const docSnapshot = await getDoc(docRef);
@@ -59,8 +59,8 @@ export const getInvite = async (inviteId) => {
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
       const data = docSnapshot.data();
-      const { restaurants, desirabilities, userName } = data;
-      return { restaurants, desirabilities, userName };
+      const { restaurants, desirabilities, userName, cuisine1, cuisine2, location1, location2 } = data;
+      return { restaurants, desirabilities, userName, cuisine1, cuisine2, location1, location2 };
     } else {
       console.log("Document does not exist");
       return false;
