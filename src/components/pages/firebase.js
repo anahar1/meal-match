@@ -76,7 +76,7 @@ export const addSelectedRestaurant = async (userName, selectedRestaurant, timest
     console.error("Error adding selected restaurant: userName is empty");
     return false;
   }
-
+  let history = [];
   const collectionRef = collection(firestore, "Users");
   const docRef = doc(collectionRef, userName);
 
@@ -85,14 +85,22 @@ export const addSelectedRestaurant = async (userName, selectedRestaurant, timest
 
     if (docSnapshot.exists()) {
       // Document exists, update it
+      if(docSnapshot.data().history){
+        history = docSnapshot.data().history;
+      }
+      history.push({
+        selectedRestaurant: selectedRestaurant,
+        timestamp: timestamp,
+      })
       await updateDoc(docRef, {
         selectedRestaurant: selectedRestaurant,
         timestamp: timestamp,
+        history: history
       });
       console.log("Document updated successfully");
     } else {
       // Document does not exist, create a new one
-      const data = { userName, selectedRestaurant, timestamp };
+      const data = { userName, selectedRestaurant, timestamp, history};
       await setDoc(docRef, data);
       console.log("Document has been added successfully");
     }
@@ -110,8 +118,8 @@ export const userMatchedList = async (userName) => {
     const docSnapshot = await getDoc(docRef);
     if (docSnapshot.exists()) {
       const data = docSnapshot.data();
-      const { selectedRestaurant, timestamp } = data;
-      return { selectedRestaurant, timestamp };
+      const { selectedRestaurant, timestamp, history } = data;
+      return { selectedRestaurant, timestamp, history };
     } else {
       console.log("Document does not exist");
       return false;
