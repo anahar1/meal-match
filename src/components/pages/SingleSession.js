@@ -46,21 +46,10 @@ export default function SingleSession() {
 
   const handleDesirability2 = (id, desirability) => {
     setDesirabilities2({ ...desirabilities2, [id]: desirability });
-    console.log(desirabilities2);
   };
 
-  // const handleConfirmChoice = async () => {
-  //   addSelectedRestaurant(userName, selectedRestaurant)
-  //     .then(() => {
-  //       alert("Selected restaurant has been added to"+userName+"'s list successfully!");
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error adding selected restaurant:", error);
-  //     });
-  //     setShowPopup(false);
-  // };
-
   const handleConfirmChoice = async () => {
+    setTie(false);
     try {
       const timestamp = new Date();
       await addSelectedRestaurant(userName, selectedRestaurant, timestamp);
@@ -214,18 +203,6 @@ export default function SingleSession() {
                   <p>
                     <strong>Reviews:</strong> {restaurant.review_count}
                   </p>
-                  {/* <p>
-                    <strong>Website:</strong>{" "}
-                    <div className="generated-link">
-                      <a
-                        href={"https://www.yelp.com/biz/" + restaurant.alias}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {"https://www.yelp.com/biz/" + restaurant.alias}
-                      </a>
-                    </div>
-                  </p> */}
 
                   <div className="desirability-container">
                     <p>How badly do you want to eat here?</p>
@@ -250,11 +227,6 @@ export default function SingleSession() {
                 </div>
               </li>
             ))}
-            {/* {showButton && <div className="create-btn-container">
-              <button className="create-btn" onClick={() => handleShare()}>
-                Share
-              </button>
-            </div>} */}
           </ul>
         </div>
       )}
