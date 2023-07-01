@@ -70,6 +70,19 @@ export default function CreateDate(props) {
       let cuisine1and2 = [];
       let data2 = await response2.json();
       data2 = data2.businesses.sort((a, b) => b.rating - a.rating);
+      //loop removes duplicates between 
+      let i = 0;
+      let j = 0;
+      while(i < 3){
+        console.log(data1[i].id);
+        if(data1[i].id === data2[j].id){
+          data2.splice(j, 1);
+          j = 0;
+          i++;
+        } else {
+          j++;
+        }
+      }
       data2 = data2.slice(0, 3);
       cuisine1and2 = data1.concat(data2);
       cuisine1and2 = cuisine1and2.sort((a, b) => b.rating - a.rating);
