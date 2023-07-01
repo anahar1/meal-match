@@ -66,12 +66,14 @@ export default function SingleSession() {
   
 
   const findMealMatch = () => {
+    let tempScore = 0;
     const bestRestaurant = restaurants.reduce(
       (best, restaurant) => {
         const score =
           (desirabilities1[restaurant.id] || 0) +
           (desirabilities2[restaurant.id] || 0);
         if (score > best.score) {
+          tempScore = score;
           return { restaurant, score };
         } else if (score === best.score) {
           setTie(true);
@@ -84,10 +86,20 @@ export default function SingleSession() {
     );
     setShowPopup(true);
     if(setTie){
-      setSelectedRestaurant(bestRestaurant[Math.floor(Math.random() * bestRestaurant.length)]);
-      console.log(selectedRestaurant);
+      let tempArr = [];
+      for(let i = 0; i < restaurants.length; i++){
+        const score =
+          (desirabilities1[restaurants[i].id] || 0) +
+          (desirabilities2[restaurants[i].id] || 0);
+        if(score === tempScore){
+          tempArr.push(restaurants[i]);
+        }
+      }
+      setSelectedRestaurant({restaurant :tempArr[Math.floor(Math.random() * tempArr.length)], score : tempScore});
+    } else {
+      setSelectedRestaurant(bestRestaurant);
     }
-    setSelectedRestaurant(bestRestaurant);
+    
   };
 
   return (
