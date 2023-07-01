@@ -68,7 +68,7 @@ export default function CreateDate(props) {
       //loop removes duplicates between 
       let i = 0;
       let j = 0;
-      while(i < 3){
+      while(i < 3 && j < data2.length){
         console.log(data1[i].id);
         if(data1[i].id === data2[j].id){
           data2.splice(j, 1);
