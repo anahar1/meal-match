@@ -53,6 +53,7 @@ export default function SingleSession() {
   // };
 
   const handleConfirmChoice = async () => {
+    setTie(false);
     try {
       const timestamp = new Date();
       await addSelectedRestaurant(userName, selectedRestaurant, timestamp);
